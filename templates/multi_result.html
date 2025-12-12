@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Résultats</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(120deg,#d7e9ff,#b5f0ff);
+    margin:0;padding:0;
+}
+.container{
+    width:900px;margin:40px auto;background:white;
+    padding:30px;border-radius:15px;
+    box-shadow:0px 5px 25px rgba(0,0,0,0.15);
+}
+table{
+    width:100%;border-collapse:collapse;margin-top:20px;
+}
+table th,td{
+    border:1px solid #bbb;padding:10px;text-align:center;
+}
+h2{text-align:center;margin-bottom:25px;color:#444;}
+ul{list-style:none;padding:0;margin-top:10px;}
+</style>
+</head>
+
+<body>
+<div class="container">
+<h2>Résultats</h2>
+
+<table>
+<tr>
+    <th>Sevérité</th>
+    <th>Niveau</th>
+    <th>Médecins</th>
+    <th>Infirmiers</th>
+    <th>Équipements</th>
+</tr>
+
+{% for r in results %}
+<tr>
+    <td>{{ r.0|floatformat:2 }}</td>
+    <td>{{ r.1 }}</td>
+    <td>{{ r.2 }}</td>
+    <td>{{ r.3 }}</td>
+    <td>
+        📡 Monitor: {{ r.4.monitor }}<br>
+        💉 Pompe: {{ r.4.pump }}<br>
+        🛏️ Lit ICU: {{ r.4.icu_bed }}<br>
+        🧪 Oxygène: {{ r.4.oxygen }}<br>
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+<hr>
+
+<h3>🧮 Totaux</h3>
+<ul>
+  <li><b>👨‍⚕️ Total Médecins:</b> {{ total_docs }}</li>
+  <li><b>👩‍⚕️ Total Infirmiers:</b> {{ total_inf }}</li>
+</ul>
+
+<h4>📦 Matériels :</h4>
+<ul>
+  <li>📡 Monitor : {{ total_equipment.monitor }}</li>
+  <li>💉 Pompe : {{ total_equipment.pump }}</li>
+  <li>🛏️ Lit ICU : {{ total_equipment.icu_bed }}</li>
+  <li>🧪 Oxygène : {{ total_equipment.oxygen }}</li>
+</ul>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Healthcare Decision System</title>
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">healthora</div>
+    <nav>
+        <a class="active">Home</a>
+        <a>About Us</a>
+        <a>Services</a>
+        <a>Doctors</a>
+        <a>Contact</a>
+    </nav>
+</header>
+
+<section class="hero">
+
+    <!-- BACKGROUND SLIDER -->
+    <div class="hero-slider">
+        <img src="{% static 'images/slide1.png' %}" class="active">
+        <img src="{% static 'images/slide2.png' %}">
+        <img src="{% static 'images/slide3.png' %}">
+    </div>
+
+    <!-- BLUE OVERLAY -->
+    <div class="hero-overlay"></div>
+
+    <!-- CONTENT -->
+    <div class="hero-container">
+
+        <div class="hero-left">
+            <span class="badge">WELCOME TO HEALTHCARE AI</span>
+
+            <h1>
+                Trusted Care for Your<br>
+                <span>Wellness Journey</span>
+            </h1>
+
+            <p>
+                Experience AI-powered healthcare solutions for medical
+                test classification and intelligent hospital resource planning.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="{% url 'predict' %}" class="btn-primary">
+                    Classify Test Results
+                </a>
+                <a href="{% url 'choose_count' %}" class="btn-secondary">
+                    Predict Resources
+                </a>
+            </div>
+        </div>
+
+ 
+
+    </div>
+</section>
+
+<script>
+let slides = document.querySelectorAll(".hero-slider img");
+let i = 0;
+
+setInterval(() => {
+    slides[i].classList.remove("active");
+    i = (i + 1) % slides.length;
+    slides[i].classList.add("active");
+}, 4000);
+</script>
+
+</body>
+</html>

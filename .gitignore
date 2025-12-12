@@ -1,0 +1,12 @@
+# ML models
+*.pkl
+
+# Environnements
+venv/
+
+# Cache
+__pycache__/
+*.pyc
+
+# DB locale
+db.sqlite3

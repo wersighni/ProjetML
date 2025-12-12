@@ -1,0 +1,139 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Medical Test Prediction</title>
+
+    <style>
+        body {
+            background-color: #d8ecff;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-container {
+            width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #003366;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 12px;
+            display: block;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #cbd6e2;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0056d6;
+            color: white;
+            border: none;
+            margin-top: 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #003c99;
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #003366;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="form-container">
+    <h2>Medical Test Prediction</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Glucose :</label>
+        <input type="number" name="glucose" required value="{{ values.glucose }}">
+
+        <label>Créatinine :</label>
+        <input type="number" step="0.01" name="creatinine" required value="{{ values.creatinine }}">
+
+        <label>Hémoglobine :</label>
+        <input type="number" name="hemoglobine" required value="{{ values.hemoglobine }}">
+
+        <label>Leucocytes :</label>
+        <input type="number" name="leucocytes" required value="{{ values.leucocytes }}">
+
+        <label>ALT :</label>
+        <input type="number" name="alt" required value="{{ values.alt }}">
+
+        <label>AST :</label>
+        <input type="number" name="ast" required value="{{ values.ast }}">
+
+        <label>Âge :</label>
+        <input type="number" name="age" required value="{{ values.age }}">
+
+        <label>Température :</label>
+        <input type="number" step="0.1" name="temperature" required value="{{ values.temperature }}">
+
+        <label>Pouls :</label>
+        <input type="number" name="pouls" required value="{{ values.pouls }}">
+
+        <label>Pression Systolique :</label>
+        <input type="number" name="pression_systolique" required value="{{ values.pression_systolique }}">
+
+        <label>Diabète :</label>
+        <select name="diabete">
+            <option value="0" {% if values.diabete == "0" %}selected{% endif %}>Non</option>
+            <option value="1" {% if values.diabete == "1" %}selected{% endif %}>Oui</option>
+        </select>
+
+        <label>Hypertension :</label>
+        <select name="hypertension">
+            <option value="0" {% if values.hypertension == "0" %}selected{% endif %}>Non</option>
+            <option value="1" {% if values.hypertension == "1" %}selected{% endif %}>Oui</option>
+        </select>
+
+        <label>Tabagisme :</label>
+        <select name="tabagisme">
+            <option value="0" {% if values.tabagisme == "0" %}selected{% endif %}>Non</option>
+            <option value="1" {% if values.tabagisme == "1" %}selected{% endif %}>Oui</option>
+        </select>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+        <div class="result">
+            🔍 Prediction : <span>{{ prediction }}</span>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
